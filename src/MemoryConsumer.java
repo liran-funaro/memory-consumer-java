@@ -187,6 +187,8 @@ public class MemoryConsumer {
 			this.max_rand = Integer.valueOf(param);
 			break;
 		case "quit":
+			changeLoad(0);
+			changeMem(0);
 			return true;
 		}
 		
