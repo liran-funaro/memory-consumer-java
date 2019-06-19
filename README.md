@@ -17,7 +17,7 @@ Performance is calculated by the amount of MBs written divided by the elapsed ti
 # Usage
 
 ```bash
-java -jar memory_consumer.jar <sleep after write ms (float)>
+java -jar memory_consumer.jar <sleep after write second (float)>
 ```
 
 `sleep_after_write`: amount of time in seconds that each memory-writing thread will sleep after writing 1MB of memory.

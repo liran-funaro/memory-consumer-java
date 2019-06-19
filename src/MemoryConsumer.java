@@ -27,6 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MemoryConsumer {
+	static final int mb = (int) Math.pow(2, 20);
 	long sleep_after_write_ms;
 
 	int max_rand = 0;
@@ -86,7 +87,7 @@ public class MemoryConsumer {
 	}
 
 	public void allocMem() {
-		byte[] b = new byte[2 ^ 20];
+		byte[] b = new byte[mb];
 		synchronized(mem_arr) {
 			mem_arr.add(b);
 		}
@@ -200,9 +201,9 @@ public class MemoryConsumer {
 		try {
 			mc = new MemoryConsumer(Double.valueOf(args[0]));
 		} catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
-			System.err.println("Parameters: <sleep after write ms (float)>");
+			System.err.println("Parameters: <sleep after write seconds (float)>");
 			System.exit(1);
-		} 
+		}
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		String ln;
