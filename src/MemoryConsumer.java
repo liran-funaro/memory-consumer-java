@@ -27,9 +27,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MemoryConsumer {
-	int max_rand;
 	long sleep_after_write_ms;
 
+	int max_rand = 0;
 	ArrayList<byte[]> mem_arr = new ArrayList<>();
 
 	AtomicLong throughput = new AtomicLong(0);
@@ -56,6 +56,8 @@ public class MemoryConsumer {
 		}
 
 		public void randomWrite() {
+			if(max_rand <= 0)
+				return;
 			int index = rand.nextInt(max_rand);
 			throughput.incrementAndGet();
 
@@ -79,8 +81,7 @@ public class MemoryConsumer {
 
 	ArrayList<Worker> workers = new ArrayList<>();
 
-	public MemoryConsumer(int max_rand, double sleep_after_write_seconds) throws Exception {
-		this.max_rand = max_rand;
+	public MemoryConsumer(double sleep_after_write_seconds) throws Exception {
 		this.sleep_after_write_ms = (long) (sleep_after_write_seconds * 1000);
 	}
 
@@ -195,9 +196,9 @@ public class MemoryConsumer {
 	public static void main(String[] args) throws NumberFormatException, Exception {
 		MemoryConsumer mc = null;
 		try {
-			mc = new MemoryConsumer(Integer.valueOf(args[0]), Double.valueOf(args[1]));
+			mc = new MemoryConsumer(Double.valueOf(args[0]));
 		} catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
-			System.err.println("Parameters: <max rand (int)> <sleep after write ms (float)>");
+			System.err.println("Parameters: <sleep after write ms (float)>");
 			System.exit(1);
 		} 
 		
