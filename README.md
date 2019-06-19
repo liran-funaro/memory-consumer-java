@@ -1,4 +1,4 @@
-# Memory Consumer
+# Memory Consumer (Java)
 
 MemoryConsumer is a program which its performance depends on the
 total memory and the load of the program.
