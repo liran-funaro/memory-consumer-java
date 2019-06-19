@@ -6,3 +6,4 @@ bin
 
 syntax: glob
 *.class
+*.jar

@@ -1,6 +1,6 @@
 
 BIN=bin
-SRC=SRC
+SRC=src
 JAVA_FILES=$(wildcard ${SRC}/*.java)
 
 
@@ -11,12 +11,9 @@ all: ${EXEC}
 
 
 ${EXEC}: ${JAVA_FILES}
-	javac -d ./${BIN} ${SRC}/*.java
+	@mkdir -p $(BIN)
+	javac -d ${BIN} ${SRC}/*.java
 	jar cvfe ${EXEC} ${MAIN_CLASS} -C ${BIN} .
-
-
-install: ${EXEC}
-	cp ${EXEC} /usr/local/bin/
 
 
 clean:
